@@ -20,14 +20,14 @@ for i in first.find_all("a", attrs={'class':'a3'}):
 
         total = 0
         num = 0
-
-        # print("총", int(soup.select_one('div.bd_lst_wrp > table > tbody > tr:nth-child(2) > td.no').text.strip())*2,"개 다운받아야함.")
-
+        
+        # 총 페이지수 구하기
         if soup.find("a", title="끝 페이지"):
             num = int(soup.find("a", title="끝 페이지").text)
         else:
             num = 1
         
+        # 한 게시글씩 들어가서 모든 첨부파일 다운로드
         for j in range(num):
             board = requests.get('https://www.comcbt.com/xe/index.php?mid={0}&page={1}'.format(i['href'][26:], j+1))
 
